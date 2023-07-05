@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>show less and show more button</title>
+  <style type="text/css">
+    body{
+      padding: 30px;
+      margin: 0;
+    }
+
+    .post{
+        font-family: "poppins",sans-serif;
+    }
+    .post p{
+      font-size: 14px;
+    }
+    .post button{
+      padding: 10px;
+      background-color: #ff0268;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+    }
+
+.post:not(:last-child){
+  margin-bottom: 50px;
+}
+
+.hide{
+  display: none;
+}
+  </style>
+
+</head>
+<body>
+<section>
+  <div class="post">
+<h1>Post Title 1</h1>
+<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<button onclick="readmore(this)">Read More</button>
+</div>
+</section>
+
+ <div class="post">
+<h1>Post Title 2</h1>
+<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur</p>
+<button onclick="readmore(this)">Read More</button>
+</div>
+</section>
+
+ <div class="post">
+<h1>Post Title 3</h1>
+<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<button onclick="readmore(this)">Read More</button>
+</div>
+</section>
+<script type="text/javascript">
+  let noOfCharac = 150;
+ let contents = document.querySelectorAll(".content");
+ contents.forEach(content => {
+  //if text length is less that noOf chracters then hide the read more button
+  if(content.textContent.length < noOfCharac){
+    content.nextElementSibling.style.display = "none";
+  }
+
+  else{
+    let displayText = content.textContent.slice(0,noOfCharac);
+    let moreText = content.textContent.slice(noOfCharac);
+  content.innerHTML = `${displayText}<span class="dots">...</span><span class="hide more">${moreText}</span>`;
+  }
+ });
+
+ function readmore(btn){
+  let post = btn.parentElement;
+  post.querySelector(".dots").classList.toggle("hide");
+  post.querySelector(".more").classList.toggle("hide");
+  btn.textContent == "Read More" ? btn.textContent = "Read Less" : btn.textContent = "Read More";
+ }
+</script>
+</body>
+</html>
